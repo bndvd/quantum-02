@@ -7,5 +7,7 @@ import bdn.quantum.model.Transaction;
 public interface TransactionService {
 	
 	List<Transaction> getTransactions(Integer userId);
+	Transaction getTransaction(Integer tranId);
+	Transaction createTransaction(Transaction transaction);
 	
 }

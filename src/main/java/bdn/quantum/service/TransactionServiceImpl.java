@@ -19,4 +19,14 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionRepository.getTransactions(userId);
 	}
 
+	@Override
+	public Transaction getTransaction(Integer tranId) {
+		return transactionRepository.getTransaction(tranId);
+	}
+
+	@Override
+	public Transaction createTransaction(Transaction transaction) {
+		return transactionRepository.createTransaction(transaction);
+	}
+
 }

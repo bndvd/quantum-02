@@ -9,16 +9,19 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/config/servlet-config.xml</param-value>
+			<param-value>
+				/WEB-INF/config/servlet-config.xml
+				classpath:jdbc-config.xml
+			</param-value>
 		</init-param>
 	</servlet>
-	
-	<!-- send all page requests to quantumServlet, which goes to servlet-config.xml
-	     servlet-config.xml in turn scans all controllers to determine which controller(s) will
-	     handle the specific page request -->
+
+	<!-- send all page requests to quantumServlet, which goes to servlet-config.xml 
+		servlet-config.xml in turn scans all controllers to determine which controller(s) 
+		will handle the specific page request -->
 	<servlet-mapping>
 		<servlet-name>quantumServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
 </web-app>
