@@ -46,7 +46,7 @@ public class TransactionControllerTest {
 		Transaction t = new Transaction();
 		t.setSecId(1);
 		t.setUserId(1);
-		t.setTranDate(new Date(2018, 1, 12));
+		t.setTranDate(new Date(118, 1, 12));
 		t.setType(PortfolioConstants.TYPE_BUY);
 		t.setShares(5.0);
 		t.setPrice(56.24);

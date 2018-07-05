@@ -6,6 +6,7 @@ import java.util.Map;
 public final class RepositoryConstants {
 
 	private static Map<String, Map<Integer, String>> columnMap;
+
 	// Transaction table
 	public static final String TABLE_TRANSACTION = "transaction";
 	// column positions in transaction table
@@ -25,7 +26,7 @@ public final class RepositoryConstants {
 	private static final String TRANSACTION_TRAN_SHARES = "shares";
 	private static final String TRANSACTION_TRAN_PRICE = "price";
 	
-	{
+	static {
 		init();
 	}
 	
@@ -45,7 +46,7 @@ public final class RepositoryConstants {
 	}
 	
 	public static String getColumnName(String table, Integer columnPosition) {
-		System.out.println("RepositoryConstants.getColumnName() table:"+table+" colPos:"+columnPosition);
 		return columnMap.get(table).get(columnPosition);
 	}
+
 }

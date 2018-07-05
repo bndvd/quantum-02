@@ -97,6 +97,12 @@ public class Transaction {
 		strBuf.append(secId);
 		strBuf.append(", Type:");
 		strBuf.append(type);
+		strBuf.append(", Date:");
+		strBuf.append(tranDate);
+		strBuf.append(", Shares:");
+		strBuf.append(shares);
+		strBuf.append(", Price:");
+		strBuf.append(price);
 		return strBuf.toString();
 	}
 
