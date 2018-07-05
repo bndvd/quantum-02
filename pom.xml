@@ -4,7 +4,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>bdn.quantum</groupId>
-	<artifactId>quantum-02-jpa</artifactId>
+	<artifactId>quantum-02</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>quantum-02-mvc-jpa</name>
 
