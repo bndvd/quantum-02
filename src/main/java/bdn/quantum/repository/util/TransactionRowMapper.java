@@ -5,13 +5,13 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import bdn.quantum.model.Transaction;
+import bdn.quantum.model.TranEntity;
 
-public class TransactionRowMapper implements RowMapper<Transaction> {
+public class TransactionRowMapper implements RowMapper<TranEntity> {
 
 	@Override
-	public Transaction mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Transaction t = new Transaction(
+	public TranEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
+		TranEntity t = new TranEntity(
 			rs.getInt(RepositoryConstants.getColumnName(RepositoryConstants.TABLE_TRANSACTION, RepositoryConstants.POS_TRANSACTION_TRAN_ID)),
 			rs.getInt(RepositoryConstants.getColumnName(RepositoryConstants.TABLE_TRANSACTION, RepositoryConstants.POS_TRANSACTION_SEC_ID)),
 			rs.getInt(RepositoryConstants.getColumnName(RepositoryConstants.TABLE_TRANSACTION, RepositoryConstants.POS_TRANSACTION_USER_ID)),

@@ -1,4 +1,4 @@
-package bdn.quantum.model;
+package bdn.quantum.util;
 
 public interface PortfolioConstants {
 

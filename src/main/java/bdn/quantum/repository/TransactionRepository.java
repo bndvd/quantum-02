@@ -2,12 +2,12 @@ package bdn.quantum.repository;
 
 import java.util.List;
 
-import bdn.quantum.model.Transaction;
+import bdn.quantum.model.TranEntity;
 
 public interface TransactionRepository {
 
-	List<Transaction> getTransactions(Integer userId);
-	Transaction createTransaction(Transaction transaction);
-	Transaction getTransaction(Integer tranId);
+	List<TranEntity> getTransactions(Integer userId);
+	TranEntity createTransaction(TranEntity transaction);
+	TranEntity getTransaction(Integer tranId);
 	
 }

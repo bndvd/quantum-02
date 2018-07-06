@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Transaction {
+public class TranEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer tranId;
@@ -19,10 +19,10 @@ public class Transaction {
 	private Double shares;
 	private Double price;
 
-	public Transaction() {
+	public TranEntity() {
 	}
 
-	public Transaction(Integer tranId, Integer secId, Integer userId, Date tranDate, String type, Double shares, Double price) {
+	public TranEntity(Integer tranId, Integer secId, Integer userId, Date tranDate, String type, Double shares, Double price) {
 		this.tranId = tranId;
 		this.secId = secId;
 		this.userId = userId;

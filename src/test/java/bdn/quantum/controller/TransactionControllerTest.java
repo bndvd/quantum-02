@@ -9,8 +9,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import bdn.quantum.model.PortfolioConstants;
-import bdn.quantum.model.Transaction;
+import bdn.quantum.model.TranEntity;
+import bdn.quantum.util.PortfolioConstants;
 
 public class TransactionControllerTest {
 	
@@ -18,13 +18,13 @@ public class TransactionControllerTest {
 	public void testGetTransactions() {
 		RestTemplate restTemplate = new RestTemplate();
 
-		ResponseEntity<List<Transaction>> transactionResponse = restTemplate.exchange(
+		ResponseEntity<List<TranEntity>> transactionResponse = restTemplate.exchange(
 				"http://localhost:8080/quantum-02/api/v1/transactions/1", HttpMethod.GET, null,
-				new ParameterizedTypeReference<List<Transaction>>() {
+				new ParameterizedTypeReference<List<TranEntity>>() {
 				});
-		List<Transaction> transactions = transactionResponse.getBody();
+		List<TranEntity> transactions = transactionResponse.getBody();
 
-		for (Transaction t : transactions) {
+		for (TranEntity t : transactions) {
 			System.out.println("Transaction: " + t.toString());
 		}
 	}
@@ -33,7 +33,7 @@ public class TransactionControllerTest {
 	public void testGetTransaction() {
 		RestTemplate restTemplate = new RestTemplate();
 
-		Transaction t = restTemplate.getForObject("http://localhost:8080/quantum-02/api/v1/transaction/1", Transaction.class);
+		TranEntity t = restTemplate.getForObject("http://localhost:8080/quantum-02/api/v1/transaction/1", TranEntity.class);
 
 		System.out.println("Get transaction: " + t);
 	}
@@ -43,15 +43,15 @@ public class TransactionControllerTest {
 	public void testCreateTransaction() {
 		RestTemplate restTemplate = new RestTemplate();
 
-		Transaction t = new Transaction();
+		TranEntity t = new TranEntity();
 		t.setSecId(1);
 		t.setUserId(1);
-		t.setTranDate(new Date(118, 1, 12));
-		t.setType(PortfolioConstants.TYPE_BUY);
-		t.setShares(5.0);
-		t.setPrice(56.24);
+		t.setTranDate(new Date(118, 3, 5));
+		t.setType(PortfolioConstants.TYPE_SELL);
+		t.setShares(1.0);
+		t.setPrice(61.53);
 		
-		t = restTemplate.postForObject("http://localhost:8080/quantum-02/api/v1/transaction", t, Transaction.class);
+		t = restTemplate.postForObject("http://localhost:8080/quantum-02/api/v1/transaction", t, TranEntity.class);
 	}
 
 }

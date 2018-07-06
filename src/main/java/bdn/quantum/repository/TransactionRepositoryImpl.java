@@ -12,7 +12,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import bdn.quantum.model.Transaction;
+import bdn.quantum.model.TranEntity;
 import bdn.quantum.repository.util.RepositoryConstants;
 import bdn.quantum.repository.util.TransactionRowMapper;
 
@@ -23,17 +23,17 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<Transaction> getTransactions(Integer userId) {
+	public List<TranEntity> getTransactions(Integer userId) {
 		StringBuffer stmtBuf = new StringBuffer();
 		stmtBuf.append("select * from ");
 		stmtBuf.append(RepositoryConstants.TABLE_TRANSACTION);
 
-		List<Transaction> transactions = jdbcTemplate.query(stmtBuf.toString(), new TransactionRowMapper());
+		List<TranEntity> transactions = jdbcTemplate.query(stmtBuf.toString(), new TransactionRowMapper());
 		return transactions;
 	}
 
 	@Override
-	public Transaction createTransaction(Transaction transaction) {
+	public TranEntity createTransaction(TranEntity transaction) {
 		System.out.println("XXX TransactionRepositoryImpl.createTransaction: transaction="+transaction);
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -68,7 +68,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 	}
 
 	@Override
-	public Transaction getTransaction(Integer tranId) {
+	public TranEntity getTransaction(Integer tranId) {
 		StringBuffer stmtBuf = new StringBuffer();
 		stmtBuf.append("select * from ");
 		stmtBuf.append(RepositoryConstants.TABLE_TRANSACTION);
@@ -76,7 +76,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 		stmtBuf.append(RepositoryConstants.getColumnName(RepositoryConstants.TABLE_TRANSACTION, RepositoryConstants.POS_TRANSACTION_TRAN_ID));
 		stmtBuf.append(" = ?");
 
-		Transaction t = jdbcTemplate.queryForObject(stmtBuf.toString(), new TransactionRowMapper(), tranId);
+		TranEntity t = jdbcTemplate.queryForObject(stmtBuf.toString(), new TransactionRowMapper(), tranId);
 		return t;
 	}
 
