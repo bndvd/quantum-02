@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import bdn.quantum.model.Asset;
 import bdn.quantum.model.BasketEntity;
+import bdn.quantum.model.Position;
 import bdn.quantum.model.SecurityEntity;
 import bdn.quantum.service.AssetService;
 
@@ -45,6 +47,15 @@ public class AssetController {
 		return assetService.createSecurity(security);
 	}
 	
+	@RequestMapping(value = "/assets", method = RequestMethod.GET)
+	public List<Asset> getAssets() {
+		return assetService.getAssets();
+	}
+	
+	@RequestMapping(value = "/positions/{basketId}", method = RequestMethod.GET)
+	public List<Position> getPositions(@PathVariable(value="basketId") Integer basketId) {
+		return assetService.getPositions(basketId);
+	}
 	
 	
 	/*@ExceptionHandler(RuntimeException.class)

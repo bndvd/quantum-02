@@ -18,8 +18,9 @@ public class TransactionControllerTest {
 	public void testGetTransactions() {
 		RestTemplate restTemplate = new RestTemplate();
 
+		int secId = 1;
 		ResponseEntity<List<TranEntity>> transactionResponse = restTemplate.exchange(
-				"http://localhost:8080/quantum-02/api/v1/transactions/1", HttpMethod.GET, null,
+				"http://localhost:8080/quantum-02/api/v1/transactions/"+secId, HttpMethod.GET, null,
 				new ParameterizedTypeReference<List<TranEntity>>() {
 				});
 		List<TranEntity> transactions = transactionResponse.getBody();

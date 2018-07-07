@@ -11,27 +11,38 @@ import javax.persistence.Entity;
 @Entity
 public class Asset {
 
-	private Integer groupId;
-	private String groupName;
+	private Integer basketId;
+	private String basketName;
 	private Double principal;
 	private Double principalEff;
 	private Double value;
 	private List<Position> positions;
 
-	public Integer getGroupId() {
-		return groupId;
+	public Asset() {}
+	
+	public Asset(Integer basketId, String basketName, Double principal, Double principalEff, Double value, List<Position> positions) {
+		this.basketId = basketId;
+		this.basketName = basketName;
+		this.principal = principal;
+		this.principalEff = principalEff;
+		this.value = value;
+		this.positions = positions;
 	}
 
-	public void setGroupId(Integer groupId) {
-		this.groupId = groupId;
+	public Integer getBasketId() {
+		return basketId;
 	}
 
-	public String getGroupName() {
-		return groupName;
+	public void setBasketId(Integer basketId) {
+		this.basketId = basketId;
 	}
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public String getBasketName() {
+		return basketName;
+	}
+
+	public void setBasketName(String basketName) {
+		this.basketName = basketName;
 	}
 
 	public Double getPrincipal() {
@@ -66,5 +77,14 @@ public class Asset {
 		this.positions = positions;
 	}
 
+	@Override
+	public String toString() {
+		StringBuffer strBuf = new StringBuffer();
+		strBuf.append("BasketId:");
+		strBuf.append(basketId);
+		strBuf.append(", BasketName:");
+		strBuf.append(basketName);
+		return strBuf.toString();
+	}
 
 }

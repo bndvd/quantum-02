@@ -19,6 +19,19 @@ public class Position {
 	private Double price;
 	private List<TranEntity> transactions;
 
+	public Position() {}
+	
+	public Position(Integer secId, String symbol, Double principal, Double principalEff, Double shares,
+			Double price, List<TranEntity> transactions) {
+		this.secId = secId;
+		this.symbol = symbol;
+		this.principal = principal;
+		this.principalEff = principalEff;
+		this.shares = shares;
+		this.price = price;
+		this.transactions = transactions;
+	}
+	
 	public Integer getSecId() {
 		return secId;
 	}
@@ -73,6 +86,16 @@ public class Position {
 
 	public void setTransactions(List<TranEntity> transactions) {
 		this.transactions = transactions;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer strBuf = new StringBuffer();
+		strBuf.append("SecId:");
+		strBuf.append(secId);
+		strBuf.append(", Symbol:");
+		strBuf.append(symbol);
+		return strBuf.toString();
 	}
 
 }

@@ -8,7 +8,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import bdn.quantum.model.Asset;
 import bdn.quantum.model.BasketEntity;
+import bdn.quantum.model.Position;
 import bdn.quantum.model.SecurityEntity;
 
 public class AssetControllerTest {
@@ -53,6 +55,22 @@ public class AssetControllerTest {
 	}
 	
 	@Test(timeout = 10000)
+	public void testGetSecuritiesForBasket() {
+		RestTemplate restTemplate = new RestTemplate();
+
+		int basketId = 2;
+		ResponseEntity<List<SecurityEntity>> transactionResponse = restTemplate.exchange(
+				"http://localhost:8080/quantum-02/api/v1/securities/"+basketId, HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<SecurityEntity>>() {
+				});
+		List<SecurityEntity> securities = transactionResponse.getBody();
+
+		for (SecurityEntity s : securities) {
+			System.out.println("Security: " + s.toString());
+		}
+	}
+	
+	@Test(timeout = 10000)
 	public void testCreateSecurity() {
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -61,4 +79,35 @@ public class AssetControllerTest {
 		restTemplate.postForEntity("http://localhost:8080/quantum-02/api/v1/security", s, SecurityEntity.class);	
 	}
 
+	@Test(timeout = 10000)
+	public void testGetAssets() {
+		RestTemplate restTemplate = new RestTemplate();
+
+		ResponseEntity<List<Asset>> transactionResponse = restTemplate.exchange(
+				"http://localhost:8080/quantum-02/api/v1/assets", HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<Asset>>() {
+				});
+		List<Asset> assets = transactionResponse.getBody();
+
+		for (Asset a : assets) {
+			System.out.println("Asset: " + a.toString());
+		}
+	}
+	
+	@Test(timeout = 10000)
+	public void testGetPositions() {
+		RestTemplate restTemplate = new RestTemplate();
+
+		Integer basketId = 2;
+		ResponseEntity<List<Position>> transactionResponse = restTemplate.exchange(
+				"http://localhost:8080/quantum-02/api/v1/positions/"+basketId, HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<Position>>() {
+				});
+		List<Position> positions = transactionResponse.getBody();
+
+		for (Position p : positions) {
+			System.out.println("Position: " + p.toString());
+		}
+	}
+	
 }
