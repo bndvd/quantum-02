@@ -12,7 +12,7 @@ public class Asset {
 	private Double principal;
 	private Double principalEff;
 	private Double value;
-	private List<Security> securities;
+	private List<Position> securities;
 
 	public Integer getGroupId() {
 		return groupId;
@@ -54,11 +54,11 @@ public class Asset {
 		this.value = value;
 	}
 
-	public List<Security> getSecurities() {
+	public List<Position> getSecurities() {
 		return securities;
 	}
 
-	public void setSecurities(List<Security> securities) {
+	public void setSecurities(List<Position> securities) {
 		this.securities = securities;
 	}
 

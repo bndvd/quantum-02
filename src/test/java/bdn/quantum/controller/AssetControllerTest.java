@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import bdn.quantum.model.BasketEntity;
+import bdn.quantum.model.SecurityEntity;
 
 public class AssetControllerTest {
 	
@@ -34,6 +35,30 @@ public class AssetControllerTest {
 		BasketEntity b = new BasketEntity(null, "W3000");
 		
 		restTemplate.postForEntity("http://localhost:8080/quantum-02/api/v1/basket", b, BasketEntity.class);	
+	}
+
+	@Test(timeout = 10000)
+	public void testGetSecurities() {
+		RestTemplate restTemplate = new RestTemplate();
+
+		ResponseEntity<List<SecurityEntity>> transactionResponse = restTemplate.exchange(
+				"http://localhost:8080/quantum-02/api/v1/securities", HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<SecurityEntity>>() {
+				});
+		List<SecurityEntity> securities = transactionResponse.getBody();
+
+		for (SecurityEntity s : securities) {
+			System.out.println("Security: " + s.toString());
+		}
+	}
+	
+	@Test(timeout = 10000)
+	public void testCreateSecurity() {
+		RestTemplate restTemplate = new RestTemplate();
+
+		SecurityEntity s = new SecurityEntity(null, 1, "AAPL");
+		
+		restTemplate.postForEntity("http://localhost:8080/quantum-02/api/v1/security", s, SecurityEntity.class);	
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 
 @Entity
-public class Security {
+public class Position {
 
 	private Integer secId;
 	private String symbol;

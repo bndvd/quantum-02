@@ -11,8 +11,16 @@ public class SecurityEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer secId;
-	private Integer groupId;
+	private Integer basketId;
 	private String symbol;
+	
+	public SecurityEntity() {}
+	
+	public SecurityEntity(Integer secId, Integer basketId, String symbol) {
+		this.secId = secId;
+		this.basketId = basketId;
+		this.symbol = symbol;
+	}
 
 	public Integer getSecId() {
 		return secId;
@@ -22,12 +30,12 @@ public class SecurityEntity {
 		this.secId = secId;
 	}
 
-	public Integer getGroupId() {
-		return groupId;
+	public Integer getBasketId() {
+		return basketId;
 	}
 
-	public void setGroupId(Integer groupId) {
-		this.groupId = groupId;
+	public void setBasketId(Integer basketId) {
+		this.basketId = basketId;
 	}
 
 	public String getSymbol() {
@@ -38,4 +46,12 @@ public class SecurityEntity {
 		this.symbol = symbol;
 	}
 
+	@Override
+	public String toString() {
+		StringBuffer strBuf = new StringBuffer();
+		strBuf.append("SecId:").append(secId);
+		strBuf.append(" BasketId:").append(basketId);
+		strBuf.append(" Symbol:").append(symbol);
+		return strBuf.toString();
+	}
 }

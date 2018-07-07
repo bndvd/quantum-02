@@ -52,10 +52,10 @@ public class BasketRepositoryImpl implements BasketRepository {
 		}, keyHolder);
 		
 		Number baskeId = keyHolder.getKey();
-		return getGroup(baskeId.intValue());
+		return getBasket(baskeId.intValue());
 	}
 	
-	private BasketEntity getGroup(Integer basketId) {
+	private BasketEntity getBasket(Integer basketId) {
 		StringBuffer stmtBuf = new StringBuffer();
 		stmtBuf.append("select * from ");
 		stmtBuf.append(RepositoryConstants.TABLE_BASKET);
