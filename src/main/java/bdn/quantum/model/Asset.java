@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
+//
+// Asset is a rough representation of a Basket, and is a grouping of one or more Positions that 
+// represent the same underlying asset (e.g., an index fund and an ETF of the same asset)
+//
 @Entity
 public class Asset {
 
@@ -12,7 +16,7 @@ public class Asset {
 	private Double principal;
 	private Double principalEff;
 	private Double value;
-	private List<Position> securities;
+	private List<Position> positions;
 
 	public Integer getGroupId() {
 		return groupId;
@@ -54,12 +58,13 @@ public class Asset {
 		this.value = value;
 	}
 
-	public List<Position> getSecurities() {
-		return securities;
+	public List<Position> getPositions() {
+		return positions;
 	}
 
-	public void setSecurities(List<Position> securities) {
-		this.securities = securities;
+	public void setPositions(List<Position> positions) {
+		this.positions = positions;
 	}
+
 
 }

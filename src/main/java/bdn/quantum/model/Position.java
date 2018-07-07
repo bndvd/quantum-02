@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
+
+//
+// Position is a rough representation of SecurityEntity and underlying TranEntities
+//
 @Entity
 public class Position {
 

@@ -10,6 +10,7 @@ public interface AssetService {
 	List<BasketEntity> getBaskets();
 	BasketEntity createBasket(BasketEntity basket);
 	List<SecurityEntity> getSecurities();
+	List<SecurityEntity> getSecurities(Integer basketId);
 	SecurityEntity createSecurity(SecurityEntity security);
 
 }

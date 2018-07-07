@@ -17,6 +17,8 @@ public class AssetServiceImpl implements AssetService {
 	BasketRepository basketRepository;
 	@Autowired
 	SecurityRepository securityRepository;
+	@Autowired
+	TransactionService transactionService;
 
 	@Override
 	public List<BasketEntity> getBaskets() {
@@ -34,10 +36,15 @@ public class AssetServiceImpl implements AssetService {
 	}
 
 	@Override
+	public List<SecurityEntity> getSecurities(Integer basketId) {
+		return securityRepository.getSecurities(basketId);
+	}
+	
+	@Override
 	public SecurityEntity createSecurity(SecurityEntity security) {
 		return securityRepository.createSecurity(security);
 	}
-	
+
 	
 	
 }

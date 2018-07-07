@@ -19,10 +19,10 @@ public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 
-	@RequestMapping(value = "/transactions/{userId}", method = RequestMethod.GET)
-	public List<TranEntity> getTransactions(@PathVariable(value="userId") Integer userId) {
-		System.out.println("TransactionController.getTransactions: userId=" + userId);
-		return transactionService.getTransactions(userId);
+	@RequestMapping(value = "/transactions/{secId}", method = RequestMethod.GET)
+	public List<TranEntity> getTransactions(@PathVariable(value="secId") Integer secId) {
+		System.out.println("TransactionController.getTransactions: secId=" + secId);
+		return transactionService.getTransactions(secId);
 	}
 	
 	@RequestMapping(value = "/transaction/{tranId}", method = RequestMethod.GET)

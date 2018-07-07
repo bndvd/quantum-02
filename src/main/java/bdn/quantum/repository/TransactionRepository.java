@@ -6,7 +6,7 @@ import bdn.quantum.model.TranEntity;
 
 public interface TransactionRepository {
 
-	List<TranEntity> getTransactions(Integer userId);
+	List<TranEntity> getTransactions(Integer secId);
 	TranEntity createTransaction(TranEntity transaction);
 	TranEntity getTransaction(Integer tranId);
 	

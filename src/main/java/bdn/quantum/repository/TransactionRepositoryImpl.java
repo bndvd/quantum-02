@@ -23,12 +23,15 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<TranEntity> getTransactions(Integer userId) {
+	public List<TranEntity> getTransactions(Integer secId) {
 		StringBuffer stmtBuf = new StringBuffer();
 		stmtBuf.append("select * from ");
 		stmtBuf.append(RepositoryConstants.TABLE_TRANSACTION);
+		stmtBuf.append(" where ");
+		stmtBuf.append(RepositoryConstants.getColumnName(RepositoryConstants.TABLE_TRANSACTION, RepositoryConstants.POS_TRANSACTION_SEC_ID));
+		stmtBuf.append(" = ?");		
 
-		List<TranEntity> transactions = jdbcTemplate.query(stmtBuf.toString(), new TransactionRowMapper());
+		List<TranEntity> transactions = jdbcTemplate.query(stmtBuf.toString(), new TransactionRowMapper(), secId);
 		return transactions;
 	}
 

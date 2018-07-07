@@ -15,8 +15,8 @@ public class TransactionServiceImpl implements TransactionService {
 	private TransactionRepository transactionRepository;
 	
 	@Override
-	public List<TranEntity> getTransactions(Integer userId) {
-		return transactionRepository.getTransactions(userId);
+	public List<TranEntity> getTransactions(Integer secId) {
+		return transactionRepository.getTransactions(secId);
 	}
 
 	@Override

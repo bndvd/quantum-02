@@ -3,6 +3,7 @@ package bdn.quantum.contoller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,10 +35,17 @@ public class AssetController {
 		return assetService.getSecurities();
 	}
 	
+	@RequestMapping(value = "/securities/{basketId}", method = RequestMethod.GET)
+	public List<SecurityEntity> getSecurities(@PathVariable(value="basketId") Integer basketId) {
+		return assetService.getSecurities(basketId);
+	}
+	
 	@RequestMapping(value = "/security", method = RequestMethod.POST)
 	public SecurityEntity createSecurity(@RequestBody SecurityEntity security) {
 		return assetService.createSecurity(security);
 	}
+	
+	
 	
 	/*@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<ServiceError> handle(RuntimeException exc) {

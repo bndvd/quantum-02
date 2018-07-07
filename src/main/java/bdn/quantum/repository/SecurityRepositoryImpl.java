@@ -33,6 +33,19 @@ public class SecurityRepositoryImpl implements SecurityRepository {
 	}
 
 	@Override
+	public List<SecurityEntity> getSecurities(Integer basketId) {
+		StringBuffer stmtBuf = new StringBuffer();
+		stmtBuf.append("select * from ");
+		stmtBuf.append(RepositoryConstants.TABLE_SECURITY);
+		stmtBuf.append(" where ");
+		stmtBuf.append(RepositoryConstants.getColumnName(RepositoryConstants.TABLE_SECURITY, RepositoryConstants.POS_SECURITY_BASKET_ID));
+		stmtBuf.append(" = ?");
+
+		List<SecurityEntity> securities = jdbcTemplate.query(stmtBuf.toString(), new SecurityRowMapper(), basketId);
+		return securities;
+	}
+
+	@Override
 	public SecurityEntity createSecurity(SecurityEntity security) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
