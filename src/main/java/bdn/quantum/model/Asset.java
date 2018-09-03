@@ -14,18 +14,18 @@ public class Asset {
 	private Integer basketId;
 	private String basketName;
 	private Double principal;
-	private Double principalEff;
 	private Double value;
+	private Double realizedProfit;
 	private List<Position> positions;
 
 	public Asset() {}
 	
-	public Asset(Integer basketId, String basketName, Double principal, Double principalEff, Double value, List<Position> positions) {
+	public Asset(Integer basketId, String basketName, Double principal, Double value, Double realizedProfit, List<Position> positions) {
 		this.basketId = basketId;
 		this.basketName = basketName;
 		this.principal = principal;
-		this.principalEff = principalEff;
 		this.value = value;
+		this.realizedProfit = realizedProfit;
 		this.positions = positions;
 	}
 
@@ -53,20 +53,20 @@ public class Asset {
 		this.principal = principal;
 	}
 
-	public Double getPrincipalEff() {
-		return principalEff;
-	}
-
-	public void setPrincipalEff(Double principalEff) {
-		this.principalEff = principalEff;
-	}
-
 	public Double getValue() {
 		return value;
 	}
 
 	public void setValue(Double value) {
 		this.value = value;
+	}
+
+	public Double getRealizedProfit() {
+		return realizedProfit;
+	}
+
+	public void setRealizedProfit(Double realizedProfit) {
+		this.realizedProfit = realizedProfit;
 	}
 
 	public List<Position> getPositions() {

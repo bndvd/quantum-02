@@ -27,7 +27,7 @@ public class AssetServiceImpl implements AssetService {
 	SecurityRepository securityRepository;
 	@Autowired
 	TransactionRepository transactionRepository;
-	
+
 	@Autowired
 	TranEntryComparator transactionComparator;
 	@Autowired
@@ -52,7 +52,7 @@ public class AssetServiceImpl implements AssetService {
 	public List<SecurityEntity> getSecurities(Integer basketId) {
 		return securityRepository.getSecurities(basketId);
 	}
-	
+
 	@Override
 	public SecurityEntity createSecurity(SecurityEntity security) {
 		return securityRepository.createSecurity(security);
@@ -61,45 +61,46 @@ public class AssetServiceImpl implements AssetService {
 	@Override
 	public List<Asset> getAssets() {
 		List<Asset> result = new ArrayList<>();
-		
+
 		List<BasketEntity> baskets = basketRepository.getBaskets();
 		for (BasketEntity b : baskets) {
 			Integer basketId = b.getBasketId();
 			String basketName = b.getName();
 			Double principal = 0.0;
-			Double principalEff = 0.0;
 			Double value = 0.0;
-			
+			Double realizedProfit = 0.0;
+
 			List<Position> positions = getPositions(basketId);
 			positions.sort(positionComparator);
-			
+
 			for (Position p : positions) {
 				principal += p.getPrincipal();
-				principalEff += p.getPrincipalEff();
 				Double positionValue = p.getPrice() * p.getShares();
-				value += (positionValue >= 0.0 ) ? positionValue : 0.0;
+				value += (positionValue >= 0.0) ? positionValue : 0.0;
+				realizedProfit += p.getRealizedProfit();
 			}
-			
-			Asset a = new Asset(basketId, basketName, principal, principalEff, value, positions);
+
+			Asset a = new Asset(basketId, basketName, principal, value, realizedProfit, positions);
 			result.add(a);
 		}
-		
+
 		return result;
 	}
 
 	@Override
 	public List<Position> getPositions(Integer basketId) {
 		List<Position> result = new ArrayList<>();
-		
+
 		List<SecurityEntity> securities = securityRepository.getSecurities(basketId);
 		for (SecurityEntity s : securities) {
 			Integer secId = s.getSecId();
 			String symbol = s.getSymbol();
 			Double principal = 0.0;
 			Double shares = 0.0;
+			Double realizedProfit = 0.0;
 			// TODO get price from public service
 			Double price = -1.0;
-			
+
 			List<TranEntity> transactions = transactionRepository.getTransactions(secId);
 			transactions.sort(transactionComparator);
 			for (TranEntity t : transactions) {
@@ -107,25 +108,27 @@ public class AssetServiceImpl implements AssetService {
 					principal += (t.getPrice() * t.getShares());
 					shares += t.getShares();
 				}
+				// using Average Cost Basis for computing cost/profit and deducting from
+				// principal
 				else if (t.getType().equals(PortfolioConstants.TYPE_SELL)) {
-					Double valuePriorToSale = shares * t.getPrice();
-					Double principalToValueRatioPriorToSale = principal / valuePriorToSale;
-					Double valueOfSale = t.getShares() * t.getPrice();
-					Double principalPortionOfSale = valueOfSale * principalToValueRatioPriorToSale;
-					principal -= principalPortionOfSale;
+					Double averageCostPerShare = principal / shares;
+					Double costOfSharesSold = t.getShares() * averageCostPerShare;
+					realizedProfit += (t.getPrice() * t.getShares()) - costOfSharesSold;
+
+					principal -= costOfSharesSold;
 					shares -= t.getShares();
 				}
+				else if (t.getType().equals(PortfolioConstants.TYPE_DIVIDEND)) {
+					realizedProfit += t.getPrice() * t.getShares();
+				}
 			}
-			// TODO calculate effective principal
-			Double principalEff = principal;
-			
-			Position p = new Position(secId, symbol, principal, principalEff, shares, price, transactions);
+
+			Position p = new Position(secId, symbol, principal, shares, realizedProfit, price, transactions);
 			result.add(p);
 		}
-		
+
 		result.sort(positionComparator);
 		return result;
 	}
 
-	
 }

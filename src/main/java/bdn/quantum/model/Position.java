@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
-
 //
 // Position is a rough representation of SecurityEntity and underlying TranEntities
 //
@@ -14,24 +13,25 @@ public class Position {
 	private Integer secId;
 	private String symbol;
 	private Double principal;
-	private Double principalEff;
 	private Double shares;
+	private Double realizedProfit;		// profit/loss realized from sales of security or dividends
 	private Double price;
 	private List<TranEntity> transactions;
 
-	public Position() {}
-	
-	public Position(Integer secId, String symbol, Double principal, Double principalEff, Double shares,
-			Double price, List<TranEntity> transactions) {
+	public Position() {
+	}
+
+	public Position(Integer secId, String symbol, Double principal, Double shares, Double realizedProfit, Double price,
+			List<TranEntity> transactions) {
 		this.secId = secId;
 		this.symbol = symbol;
 		this.principal = principal;
-		this.principalEff = principalEff;
 		this.shares = shares;
+		this.realizedProfit = realizedProfit;
 		this.price = price;
 		this.transactions = transactions;
 	}
-	
+
 	public Integer getSecId() {
 		return secId;
 	}
@@ -56,20 +56,20 @@ public class Position {
 		this.principal = principal;
 	}
 
-	public Double getPrincipalEff() {
-		return principalEff;
-	}
-
-	public void setPrincipalEff(Double principalEff) {
-		this.principalEff = principalEff;
-	}
-
 	public Double getShares() {
 		return shares;
 	}
 
 	public void setShares(Double shares) {
 		this.shares = shares;
+	}
+
+	public Double getRealizedProfit() {
+		return realizedProfit;
+	}
+
+	public void setRealizedProfit(Double realizedProfit) {
+		this.realizedProfit = realizedProfit;
 	}
 
 	public Double getPrice() {
